@@ -365,7 +365,7 @@ export default function SmsLogsListPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="font-semibold">Numéro</TableHead>
+                    <TableHead className="font-semibold">Numéro / Expéditeur</TableHead>
                     <TableHead className="font-semibold">Message</TableHead>
                     <TableHead className="font-semibold">Type</TableHead>
                     <TableHead className="font-semibold">Statut</TableHead>
@@ -378,11 +378,18 @@ export default function SmsLogsListPage() {
                   {filteredLogs.map((log, index) => (
                     <TableRow key={log.id || index} className="hover:bg-accent/50">
                       <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Phone className="h-4 w-4 text-muted-foreground" />
-                          <span className="font-mono text-sm text-foreground">
-                            {log.phone_number || log.phone || log.recipient || "N/A"}
-                          </span>
+                        <div className="flex items-start gap-2">
+                          <Phone className="h-4 w-4 text-muted-foreground mt-0.5" />
+                          <div className="flex flex-col">
+                            <span className="font-mono text-sm text-foreground">
+                              {log.phone_number || log.phone || log.recipient || log.sender || "N/A"}
+                            </span>
+                            {/* {(log.sender || log.sender_name || log.origin) && (
+                              <span className="text-xs text-muted-foreground">
+                                {log.sender || log.sender_name || log.origin}
+                              </span>
+                            )} */}
+                          </div>
                         </div>
                       </TableCell>
                       <TableCell>

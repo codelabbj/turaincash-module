@@ -206,8 +206,9 @@ export function Sidebar() {
       {/* Mobile sidebar */}
       <div className={cn("fixed inset-0 z-50 lg:hidden", sidebarOpen ? "block" : "hidden")}>
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-        <div className="fixed inset-y-0 left-0 flex w-80 flex-col bg-background border-r border-border/50 shadow-elevated">
-          <div className="flex h-16 items-center justify-between px-6 border-b border-border/50">
+        <div className="fixed inset-y-0 left-0 flex w-80 bg-background border-r border-border/50 shadow-elevated">
+          <div className="flex h-full flex-col overflow-hidden">
+            <div className="flex h-16 items-center justify-between px-6 border-b border-border/50">
             <div className="flex items-center gap-3">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">BP</span>
@@ -220,30 +221,31 @@ export function Sidebar() {
             <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)}>
               <X className="h-4 w-4" />
             </Button>
-          </div>
-          
-          <nav className="flex-1 space-y-2 p-4 overflow-y-auto">
-            {navigationItems.map((item) => (
-              <NavItem key={item.name} item={item} />
-            ))}
-          </nav>
-          
-          <div className="p-4 border-t border-border/50">
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-red-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
-              onClick={handleLogout}
-            >
-              <LogOut className="mr-3 h-4 w-4" />
-              {t("nav.logout")}
-            </Button>
+            </div>
+            
+            <nav className="flex-1 min-h-0 space-y-2 p-4 overflow-y-auto">
+              {navigationItems.map((item) => (
+                <NavItem key={item.name} item={item} />
+              ))}
+            </nav>
+            
+            <div className="p-4 border-t border-border/50">
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-red-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+                onClick={handleLogout}
+              >
+                <LogOut className="mr-3 h-4 w-4" />
+                {t("nav.logout")}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Desktop sidebar */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col">
-        <div className="flex flex-col flex-grow bg-background border-r border-border/50 shadow-elevated">
+        <div className="flex h-full flex-col overflow-hidden bg-background border-r border-border/50 shadow-elevated">
           <div className="flex h-16 items-center px-6 border-b border-border/50">
             <div className="flex items-center gap-3">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
@@ -256,7 +258,7 @@ export function Sidebar() {
             </div>
           </div>
           
-          <nav className="flex-1 space-y-2 p-4 overflow-y-auto">
+          <nav className="flex-1 min-h-0 space-y-2 p-4 overflow-y-auto">
             {navigationItems.map((item) => (
               <NavItem key={item.name} item={item} />
             ))}
